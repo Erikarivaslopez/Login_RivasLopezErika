@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "840188946610",
+    "project_id": "curso1-4ae27",
+    "storage_bucket": "curso1-4ae27.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:840188946610:android:7c54696c1cf16708d301ab",
+        "android_client_info": {
+          "package_name": "com.example.login_practica_rivaslopezerika"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "840188946610-0maujt8dtm5skhvttbhoc5he17q4opc1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDpYCh75nFjEoNkHV2nCMfE4U3VSD5_iBI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "840188946610-0maujt8dtm5skhvttbhoc5he17q4opc1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
