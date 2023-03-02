@@ -20,6 +20,8 @@ class SignInController extends GetxController {
   }
 
   handleSignIn() async {
+    print(email);
+    print(password);
     if (email == '' || password == '') {
       return;
     }
@@ -31,8 +33,8 @@ class SignInController extends GetxController {
       if (credential.user != null) {
         Usuario? usuario = await getUser(credential.user!.uid);
         if (usuario != null) {
-          Get.offAll(() => HomeScreen(usuario: usuario));
           print('ola');
+          Get.offAll(() => HomeScreen(usuario: usuario));
         } else {
           print('adio');
         }
@@ -44,9 +46,10 @@ class SignInController extends GetxController {
         //backgroundColor: ColorsApp.primaryColor.withOpacity(0.75),
         title: const Text(
           'Error',
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
         ),
-        content: Text(e.code, style: const TextStyle(color: Colors.white)),
+        content: Text(e.code,
+            style: const TextStyle(color: Color.fromARGB(255, 0, 0, 0))),
       ));
       if (e.code == 'user-not-found') {
         print('No user found for that email.');
@@ -59,7 +62,7 @@ class SignInController extends GetxController {
   Future<Usuario?> getUser(String id) async {
     Usuario usuario;
     final db = FirebaseFirestore.instance;
-    final docRef = db.collection("Usuarios").doc(id);
+    final docRef = db.collection("Usuario").doc(id);
     usuario = await docRef.get().then(
       (DocumentSnapshot<Map<String, dynamic>> doc) {
         return Usuario.fromFirestore(doc);

@@ -37,7 +37,7 @@ class HomeScreen extends StatelessWidget {
               height: 48,
             ),
             CustomListtile(
-                title: 'Nombre',
+                title: 'Name',
                 subtitle: usuario.name,
                 icon: Icons.account_circle_rounded),
             CustomListtile(

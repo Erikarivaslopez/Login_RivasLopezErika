@@ -1,7 +1,9 @@
+//import 'package:curso_firebase_maps/config/theme/colors.dart';
+//import 'package:curso_firebase_maps/presentation/screens/sign_in_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:login_practica_rivaslopezerika/screens/widget_login.dart';
-import 'package:login_practica_rivaslopezerika/screens/widget_signup.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,16 +16,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(useMaterial3: true),
-      routes: {
-        'home': (context) => WidgetLogin(),
-        'WidgetLogin': (context) => WidgetLogin(),
-        'WidgetSignUp': (context) => const WidgetSignUp(),
-        // 'HomeScreen': (context) => const HomeScreen(),
-      },
-      debugShowCheckedModeBanner: false,
-      initialRoute: 'WidgetLogin',
+    return GetMaterialApp(
+      title: 'uwu',
+      theme: ThemeData(
+          useMaterial3: true,
+          //colorSchemeSeed: ColorsApp.primaryColor,
+          appBarTheme: const AppBarTheme(
+            centerTitle: true,
+            iconTheme: IconThemeData(color: Colors.white),
+            //backgroundColor: ColorsApp.primaryColor
+          )),
+      home: WidgetLogin(),
     );
   }
 }

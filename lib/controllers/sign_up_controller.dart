@@ -64,7 +64,7 @@ class SignUpController extends GetxController {
     final user = Usuario(name: name, email: email);
     final db = FirebaseFirestore.instance;
     db
-        .collection("Usuarios")
+        .collection("Usuario")
         .doc(id)
         .set(user.toFirestore())
         .onError((e, _) => print("Error writing document: $e"));
