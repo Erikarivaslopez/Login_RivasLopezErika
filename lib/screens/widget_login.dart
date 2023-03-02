@@ -1,22 +1,19 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:login_practica_rivaslopezerika/controllers/sign_in_controller.dart';
+import 'package:login_practica_rivaslopezerika/screens/custom_textformfield.dart';
 import 'package:login_practica_rivaslopezerika/screens/widget_signup.dart';
 
-class WidgetLogin extends StatefulWidget {
-  const WidgetLogin({super.key});
-
-  @override
-  State<WidgetLogin> createState() => _WidgetLogin();
-}
-
-class _WidgetLogin extends State<WidgetLogin> {
-  final TextEditingController textControllerEmailR = TextEditingController();
-  final TextEditingController textControllerPasswordR = TextEditingController();
+class WidgetLogin extends StatelessWidget {
+  final controller = Get.put(SignInController());
+  WidgetLogin({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SizedBox(
         width: double.infinity,
         child: Stack(
@@ -60,9 +57,17 @@ class _WidgetLogin extends State<WidgetLogin> {
                     ),
                     Padding(
                       padding: const EdgeInsets.all(2.0),
-                      child: TextFormField(
-                        controller: textControllerEmailR,
+                      child: CustomTextFormField(
+                        hintText: '',
                         keyboardType: TextInputType.emailAddress,
+                        onChanged: controller.handleEmail,
+                        //controller: textControllerEmailR,
+
+                        decoration: const InputDecoration(
+                            suffixIcon: Icon(
+                          Icons.remove_red_eye_outlined,
+                          color: Colors.grey,
+                        )),
                       ),
                     ),
                     const Padding(padding: EdgeInsets.all(6)),
@@ -76,8 +81,11 @@ class _WidgetLogin extends State<WidgetLogin> {
                     ),
                     Padding(
                       padding: const EdgeInsets.all(2.0),
-                      child: TextFormField(
-                        controller: textControllerPasswordR,
+                      child: CustomTextFormField(
+                        keyboardType: TextInputType.text,
+                        onChanged: controller.handlePassword,
+                        hintText: '',
+                        //controller: textControllerPasswordR,
                         obscureText: true,
                         decoration: const InputDecoration(
                             suffixIcon: Icon(
@@ -96,11 +104,12 @@ class _WidgetLogin extends State<WidgetLogin> {
                                 backgroundColor:
                                     const Color.fromARGB(93, 224, 153, 234)),
                             onPressed: () {
-                              showDialog(
+                              controller.handleSignIn();
+                              /*showDialog(
                                   context: context,
                                   builder: (context) {
                                     return AlertDialog(
-                                      title: const Text('Error:('),
+                                      title: const Text('Error:(as'),
                                       content: Column(
                                         mainAxisSize: MainAxisSize.min,
                                         children: const [
@@ -116,7 +125,7 @@ class _WidgetLogin extends State<WidgetLogin> {
                                             child: const Text('Exit'))
                                       ],
                                     );
-                                  });
+                                  });*/
                             },
                             child: const Text(
                               'Log In',
