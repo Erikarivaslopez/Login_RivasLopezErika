@@ -64,6 +64,37 @@ class UpdateController extends GetxController {
     }
   }
 
+  handleDelete(Usuario usr) async {
+    if (password == '') {
+      print("You need to provide correct password to delete user");
+      return;
+    }
+    try {
+      final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: usr.email.toLowerCase(), password: password);
+
+      if (credential.user != null) {
+        Usuario? usuario = await getUser(credential.user!.uid);
+        if (usuario != null) {
+          print("we are changing old name=${usr.name} for new name= ${name}");
+          deleteUser(credential.user!.uid);
+        }
+      }
+      // Get.to(() => const HomeScreen());
+    } on FirebaseAuthException catch (e) {
+      Get.snackbar('Error', e.code,
+          backgroundColor: Colors.blue[100],
+          duration: const Duration(seconds: 5));
+      if (e.code == 'weak-password') {
+        print('The password provided is too weak.');
+      } else if (e.code == 'email-already-in-use') {
+        print('The account already exists for that email.');
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
   handleNameUpdate(Usuario usr) async {
     if (name == '') {
       return;
@@ -132,6 +163,14 @@ class UpdateController extends GetxController {
     final db = FirebaseFirestore.instance;
     final docRef = db.collection("Usuario").doc(id);
     docRef.update(data);
+
+    return true;
+  }
+
+  Future<bool> deleteUser(String id) async {
+    final db = FirebaseFirestore.instance;
+    final docRef = db.collection("Usuario").doc(id);
+    docRef.delete();
 
     return true;
   }

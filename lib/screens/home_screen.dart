@@ -40,6 +40,7 @@ class HomeScreen extends StatelessWidget {
                       TextButton(
                           onPressed: () {
                             //controller.handleNameUpdate(usr);
+                            controller.handleDelete(usuario);
                           },
                           child: const Text('I agree')),
                       TextButton(
