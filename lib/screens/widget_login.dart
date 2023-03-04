@@ -157,8 +157,7 @@ class WidgetLogin extends StatelessWidget {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) =>
-                                          const WidgetSignUp()));
+                                      builder: (context) => WidgetSignUp()));
                             },
                             child: const Text(
                               'Sign Up',
@@ -168,7 +167,7 @@ class WidgetLogin extends StatelessWidget {
                                   fontWeight: FontWeight.bold),
                             )),
                       ],
-                    ),
+                    )
                   ],
                 ),
               ),

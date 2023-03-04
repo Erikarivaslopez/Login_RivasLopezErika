@@ -4,10 +4,7 @@ class Usuario {
   final String name;
   final String email;
 
-  Usuario({
-    required this.name,
-    required this.email,
-  });
+  Usuario({required this.name, required this.email});
 
   factory Usuario.fromFirestore(
     DocumentSnapshot<Map<String, dynamic>> snapshot,

@@ -20,28 +20,21 @@ class SignInController extends GetxController {
   }
 
   handleSignIn() async {
-    print(email);
-    print(password);
     if (email == '' || password == '') {
       return;
     }
     try {
-      print("get to trycatch");
       final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: email.toLowerCase(), password: password);
-      print("credential thing....");
+
       if (credential.user != null) {
         Usuario? usuario = await getUser(credential.user!.uid);
         if (usuario != null) {
-          print('ola');
           Get.offAll(() => HomeScreen(usuario: usuario));
-        } else {
-          print('adio');
-        }
+        } else {}
       }
       // Get.to(() => const HomeScreen());
     } on FirebaseAuthException catch (e) {
-      print('Algo salio mal');
       Get.dialog(AlertDialog(
         //backgroundColor: ColorsApp.primaryColor.withOpacity(0.75),
         title: const Text(
@@ -52,10 +45,7 @@ class SignInController extends GetxController {
             style: const TextStyle(color: Color.fromARGB(255, 0, 0, 0))),
       ));
       if (e.code == 'user-not-found') {
-        print('No user found for that email.');
-      } else if (e.code == 'wrong-password') {
-        print('Wrong password provided for that user.');
-      }
+      } else if (e.code == 'wrong-password') {}
     }
   }
 

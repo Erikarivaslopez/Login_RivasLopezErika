@@ -1,19 +1,20 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:login_practica_rivaslopezerika/screens/custom_textformfield.dart';
 
-class WidgetSignUp extends StatefulWidget {
-  const WidgetSignUp({super.key});
+import '../controllers/sign_up_controller.dart';
 
-  @override
-  State<WidgetSignUp> createState() => _WidgetSignUp();
-}
+class WidgetSignUp extends StatelessWidget {
+  final controller = Get.put(SignUpController());
+  WidgetSignUp({super.key});
 
-class _WidgetSignUp extends State<WidgetSignUp> {
-  final TextEditingController textControllerName = TextEditingController();
+  /*final TextEditingController textControllerName = TextEditingController();
   final TextEditingController textControllerLastName = TextEditingController();
   final TextEditingController textControllerEmail = TextEditingController();
-  final TextEditingController textControllerPassword = TextEditingController();
+  final TextEditingController textControllerPassword = TextEditingController();*/
 
   @override
   Widget build(BuildContext context) {
@@ -65,30 +66,27 @@ class _WidgetSignUp extends State<WidgetSignUp> {
                     ),
                   ),
                   Padding(
-                      padding: const EdgeInsets.all(1.0),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: TextFormField(
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'Please, enter your name';
-                            }
-                            return null;
-                          },
-                          controller: textControllerName,
-                          textCapitalization: TextCapitalization.words,
+                    padding: const EdgeInsets.all(1.0),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: CustomTextFormField(
+                          hintText: '',
+                          onChanged: controller.handleName,
                           keyboardType: TextInputType.name,
-                        ),
-                      )),
-                  const Padding(
+                          textCapitalization: TextCapitalization.words,
+                          decoration: const InputDecoration()),
+                    ),
+                  ),
+                  /*const Padding(
                     padding: EdgeInsets.all(10.0),
                     child: Text(
                       'LAST NAME',
                       style:
                           TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                     ),
-                  ),
-                  Padding(
+                  ),*/
+                  //LASTNAME
+                  /*Padding(
                       padding: const EdgeInsets.all(1.0),
                       child: Padding(
                         padding: const EdgeInsets.all(10.0),
@@ -103,7 +101,7 @@ class _WidgetSignUp extends State<WidgetSignUp> {
                           textCapitalization: TextCapitalization.words,
                           keyboardType: TextInputType.name,
                         ),
-                      )),
+                      )),*/
                   const Padding(padding: EdgeInsets.all(10)),
                   const Padding(
                     padding: EdgeInsets.all(10.0),
@@ -124,7 +122,7 @@ class _WidgetSignUp extends State<WidgetSignUp> {
                           }
                           return null;
                         },
-                        controller: textControllerEmail,
+                        onChanged: controller.handleEmail,
                         keyboardType: TextInputType.emailAddress,
                       ),
                     ),
@@ -149,7 +147,7 @@ class _WidgetSignUp extends State<WidgetSignUp> {
                           }
                           return null;
                         },
-                        controller: textControllerPassword,
+                        onChanged: controller.handlePassword,
                         obscureText: true,
                         decoration: const InputDecoration(
                             suffixIcon: Icon(
@@ -166,65 +164,12 @@ class _WidgetSignUp extends State<WidgetSignUp> {
                       children: [
                         Column(
                           children: [
-                            ElevatedButton(
-                                style: ElevatedButton.styleFrom(
+                            FloatingActionButton(
+                                /*style: ElevatedButton.styleFrom(
                                     backgroundColor: const Color.fromARGB(
-                                        93, 224, 153, 234)),
+                                        93, 224, 153, 234)),*/
                                 onPressed: () {
-                                  if (textControllerName.text != "" &&
-                                      textControllerLastName.text != "" &&
-                                      textControllerEmail.text != "" &&
-                                      textControllerPassword.text != "") {
-                                    //-- este
-                                    showDialog(
-                                        context: context,
-                                        builder: (context) {
-                                          return AlertDialog(
-                                            title: const Text(
-                                              'New user added succesfully',
-                                              style: TextStyle(fontSize: 20),
-                                            ),
-                                            content: Column(
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: [
-                                                Text(
-                                                    'Hello ${textControllerName.text} ${textControllerLastName.text}!'),
-                                              ],
-                                            ),
-                                            actions: [
-                                              TextButton(
-                                                  onPressed: () {
-                                                    Navigator.pop(context);
-                                                  },
-                                                  child: const Text('Exit'))
-                                            ],
-                                          );
-                                        });
-                                    //myFunctionToDatabase(nombre,apellido);
-                                  } else {
-                                    //--- mensaje de error
-                                    showDialog(
-                                        context: context,
-                                        builder: (context) {
-                                          return AlertDialog(
-                                            title: const Text('Error:('),
-                                            content: Column(
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: const [
-                                                Text(
-                                                    'Please, fill the required data'),
-                                              ],
-                                            ),
-                                            actions: [
-                                              TextButton(
-                                                  onPressed: () {
-                                                    Navigator.pop(context);
-                                                  },
-                                                  child: const Text('Exit'))
-                                            ],
-                                          );
-                                        });
-                                  }
+                                  controller.handleSignUp();
                                 },
                                 child: const Text(
                                   'Sign Up',
@@ -271,7 +216,7 @@ class _WidgetSignUp extends State<WidgetSignUp> {
                     ),
                   ),
 
-                  Row(
+                  /* Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
@@ -304,7 +249,7 @@ class _WidgetSignUp extends State<WidgetSignUp> {
                         child: null,
                       ),
                     ],
-                  ),
+                  ),*/
                 ],
               ),
             )

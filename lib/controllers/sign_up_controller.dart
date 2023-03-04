@@ -29,6 +29,8 @@ class SignUpController extends GetxController {
   }
 
   handleSignUp() async {
+    print('hola');
+    print(email + password + name);
     if (email == '' || password == '' || name == '') {
       return;
     }
